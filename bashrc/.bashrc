@@ -33,8 +33,10 @@ alias pdepl='bin/console pimcore:deployment:classes-rebuil -c'
 # eval "$(starship init bash)"
 
 export SYSTEMD_EDITOR=nvim
-export ANTHROPIC_AUTH_TOKEN="sk-mDPr8EjYRxRiZodCaoQVhQ"
 export ANTHROPIC_BASE_URL="http://litellm.factory.vpn/anthropic"
+
+# Load local secrets — not tracked by git, create ~/.bashrc.secrets for tokens/keys
+[ -f "$HOME/.bashrc.secrets" ] && source "$HOME/.bashrc.secrets"
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
