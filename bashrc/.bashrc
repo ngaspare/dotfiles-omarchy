@@ -10,6 +10,13 @@ source ~/.local/share/omarchy/default/bash/rc
 # My custom aliases
 alias t='tmux attach-session || tmux new-session'
 alias vim='nvim'
+# alias fzf='nvim $(fzf --preview="cat {}")'
+alias fzf='fzf --preview="cat {}"'
+# alias that lists by date modified
+alias lst='ls -s modified'
+
+# On Hyprland (unlike GNOME), VS Code doesn't automatically detect gnome-keyring properly, so it tries multiple password stores before timing out and eventually finding gnome-keyring.
+alias code='code --password-store=gnome-libsecret --ozone-platform=x11'
 
 # Kill all docker containers
 alias dka='docker ps -q | xargs docker stop'
@@ -24,3 +31,21 @@ alias pdepl='bin/console pimcore:deployment:classes-rebuil -c'
 
 # Starship
 # eval "$(starship init bash)"
+
+export SYSTEMD_EDITOR=nvim
+export ANTHROPIC_AUTH_TOKEN="sk-mDPr8EjYRxRiZodCaoQVhQ"
+export ANTHROPIC_BASE_URL="http://litellm.factory.vpn/anthropic"
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+# BEGIN SNIPPET: Pimcore Cloud CLI configuration
+HOME=${HOME:-'/home/nikola'}
+export PATH="$HOME/"'.pimcore-cli/bin':"$PATH"
+if [ -f "$HOME/"'.pimcore-cli/shell-config.rc' ]; then . "$HOME/"'.pimcore-cli/shell-config.rc'; fi # END SNIPPET
+
+
+# Deduplicate and normalize $PATH (remove empty and repeated entries).
+export PATH=$(printf "%s" "$PATH" | tr ':' '\n' | awk 'NF && !x[$0]++' | paste -sd:)
+export PATH="$HOME/.local/bin:$PATH"
+
+. "$HOME/.local/share/../bin/env"
