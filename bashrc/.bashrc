@@ -60,3 +60,14 @@ export PATH=$(printf "%s" "$PATH" | tr ':' '\n' | awk 'NF && !x[$0]++' | paste -
 export PATH="$HOME/.local/bin:$PATH"
 
 . "$HOME/.local/share/../bin/env"
+
+# Superfile image previews: Herdr sets TERM_PROGRAM=herdr,
+# so override it to ghostty for Kitty graphics support.
+spf() {
+    TERM_PROGRAM=ghostty command spf "$@"
+}
+
+# SSH from Herdr: preserve Ghostty terminal capabilities for remote apps.
+ssh() {
+    TERM=xterm-ghostty TERM_PROGRAM=ghostty command ssh "$@"
+}
